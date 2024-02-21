@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace CarBookingWeb.Migrations
+namespace CarBookingData.Migrations
 {
     /// <inheritdoc />
     public partial class addCar : Migration

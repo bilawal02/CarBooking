@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarBookingWeb", "CarBookingWeb\CarBookingWeb.csproj", "{DB57CEA2-F5D4-4721-9333-333BF97FE056}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarBookingWeb", "CarBookingWeb\CarBookingWeb.csproj", "{DB57CEA2-F5D4-4721-9333-333BF97FE056}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarBookingModels", "CarBookingModels\CarBookingModels.csproj", "{22A39D79-8C41-4B71-9925-E8A8D7CB699B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarBookingModels", "CarBookingModels\CarBookingModels.csproj", "{22A39D79-8C41-4B71-9925-E8A8D7CB699B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarBookingData", "CarBookingData\CarBookingData.csproj", "{48106BF1-7F30-4E08-92B1-42B9DD888EFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarBookingData", "CarBookingData\CarBookingData.csproj", "{48106BF1-7F30-4E08-92B1-42B9DD888EFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

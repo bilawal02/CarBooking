@@ -1,0 +1,40 @@
+﻿@page
+@model CarBookingWeb.Pages.CarPages.CreateModel
+@{
+    ViewData["Title"] = "Cars";
+}
+
+<h1>Create New Car</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Cars.Year" class="control-label"></label>
+                <input asp-for="Cars.Year" class="form-control" />
+                <span asp-validation-for="Cars.Year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cars.Name" class="control-label"></label>
+                <input asp-for="Cars.Name" class="form-control" />
+                <span asp-validation-for="Cars.Name" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group d-grid">
+                <input type="submit" value="Create" class="btn btn-primary btn-block" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<br />
+
+<div>
+  <a asp-page="/CarPages/Index" class="btn btn-dark">Back</a>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

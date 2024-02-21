@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CarBookingWeb.Migrations
+namespace CarBookingData.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240219114235_addCar")]
+    [Migration("20240221053044_addCar")]
     partial class addCar
     {
         /// <inheritdoc />
