@@ -14,12 +14,17 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Core" Version="8.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CarBookingData\CarBookingData.csproj" />
     <ProjectReference Include="..\CarBookingModels\CarBookingModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\CheckCar\" />
   </ItemGroup>
 
 </Project>

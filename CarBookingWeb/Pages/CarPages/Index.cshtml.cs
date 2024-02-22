@@ -16,10 +16,26 @@ namespace CarBookingWeb.Pages.CarPages
 
         public IList<Car> Cars { get; set; }
 
-        [HttpGet]
+
         public async Task OnGetAsync()
         {
             Cars = await _context.Cars.ToListAsync();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> OnPostDelete(int? carId)
+        {
+            if (carId == null)
+            {
+                return NotFound();
+            }
+            var car = await _context.Cars.FindAsync(carId);
+            if (car != null)
+            {
+                _context.Cars.Remove(car);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToPage("/CarPages/Index");
         }
     }
 }

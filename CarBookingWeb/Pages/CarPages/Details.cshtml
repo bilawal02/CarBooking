@@ -1,0 +1,36 @@
+﻿@page
+@model CarBookingWeb.Pages.CarPages.DetailsModel
+@{
+    ViewData["Title"] = "Cars";
+}
+
+<h1>Car Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.CarId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.CarId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model=>model.Car.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model=>model.Car.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.Year)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.Year)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-page="/CarPages/Edit" asp-route-carId="@Model.Car.CarId" class="btn btn-warning">Edit</a> | 
+    <a asp-page="/CarPages/Index" class="btn btn-dark">Back</a>
+</div>

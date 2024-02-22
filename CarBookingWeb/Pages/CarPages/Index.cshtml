@@ -23,12 +23,94 @@
                     <td>@item.Name</td>
                     <td>@item.Year</td>
                     <td>
-                        <a asp-page="/CarPages/Details" asp-route-carId="@item.CarId">Details</a> |
-                        <a asp-page="/CarPages/Edit" asp-route-carId="@item.CarId">Edit</a> |
-                        <a asp-page="/CarPages/Delete" asp-route-carId="@item.CarId">Delete</a>
+                        <form method="post" asp-page-handler="Delete" asp-route-carId="@item.CarId">
+                            <a asp-page="/CarPages/Details" asp-route-carId="@item.CarId" class="btn btn-info">Details</a> |
+                            <a asp-page="/CarPages/Edit" asp-route-carId="@item.CarId" class="btn btn-warning">Edit</a> |
+                            <button class="btn btn-danger" onclick="return confirm('Are you sure you want to Delete this?')">Delete By Confirm</button>
+                        </form>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 }
+
+@* 
+yeh correct hy    
+<a asp-page="/CarPages/Details" asp-route-carId="@item.CarId" class="btn btn-info">Details</a> |
+<a asp-page="/CarPages/Edit" asp-route-carId="@item.CarId" class="btn btn-warning">Edit</a> |
+<a asp-page="/CarPages/Delete" asp-route-carId="@item.CarId" class="btn btn-danger">Delete</a> |
+<form method="post" asp-page-handler="Delete" asp-route-carId="@item.CarId">
+    <button class="btn btn-danger" onclick="return confirm('Are you sure you want to Delete this?')">Delete By Confirm</button>
+</form>
+
+
+yeh Fetch aur AJAX k liye hy...jo k kam nhi kr rha
+<form method="post">
+<a asp-page="/CarPages/Details" asp-route-carId="@item.CarId" class="btn btn-info">Details</a> |
+<a asp-page="/CarPages/Edit" asp-route-carId="@item.CarId" class="btn btn-warning">Edit</a> |
+<button class="btn btn-danger" onclick="deleteCar(@item.CarId)">Delete By Confirm</button>
+</form>
+
+
+yeh correct hy
+<form method="post" asp-page-handler="Delete" asp-route-carId="@item.CarId">
+<a asp-page="/CarPages/Details" asp-route-carId="@item.CarId" class="btn btn-info">Details</a> |
+<a asp-page="/CarPages/Edit" asp-route-carId="@item.CarId" class="btn btn-warning">Edit</a> |
+<button class="btn btn-danger" onclick="return confirm('Are you sure you want to Delete this?')">Delete By Confirm</button>
+</form> *@
+
+@* @section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+        // function deleteCar(carId) {
+        //     if (confirm('Are you sure you want to delete this car?')) {
+        //         fetch(`/CarPages?handler=Delete`, {
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'application/x-www-form-urlencoded',
+        //             },
+        //             body: `carId=${carId}`,  // Send carId in the request body
+        //         })
+        //             .then(response => response.json())
+        //             .then(data => {
+        //                 if (data.success) {
+        //                     console.log(data);
+        //                 } else {
+        //                     // Handle deletion failure
+        //                     console.log("Error Occur");
+        //                 }
+        //             });
+        //     }
+        // }
+
+
+
+        // $(document).ready(function () {
+        //     $('.deleteConfirmBtn').click(function () {
+        //         var carId = $(this).data('car-id');
+        //         console.log(carId);
+        //         // Make AJAX request to delete the record
+        //         $.ajax({
+        //             type: 'POST',
+        //             url: `/CarPages/Index?handler=Delete`,
+        //             data: { carId: carId },
+        //             contentType: 'application/json; charset=utf-8',
+        //             dataType: "json",
+        //             success: function (response) {
+        //                 // Update the UI (remove the deleted record)
+        //                 // $('#car-row-' + carId).remove();
+        //                 console.success('Record Deleted: ', response);
+        //             },
+        //             error: function (error) {
+        //                 console.error('Error deleting record:', error);
+        //             }
+        //         });
+        //     });
+        // });
+    </script>
+} *@
+
+
+@*   https://localhost:7182/CarPages/Delete?carId=3
+                    https://localhost:7182/CarPages?carId=4&handler=Delete *@
