@@ -2,6 +2,7 @@ using CarBookingWeb.DataContext;
 using CarBookingWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarBookingWeb.Pages.CarPages
@@ -16,6 +17,7 @@ namespace CarBookingWeb.Pages.CarPages
 
         [BindProperty]
         public Car Car { get; set; }
+        public SelectList Makes { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? carId)
         {
@@ -28,6 +30,7 @@ namespace CarBookingWeb.Pages.CarPages
             {
                 return NotFound();
             }
+            Makes = new SelectList(await _context.CarMakers.ToListAsync(), "Id", "Name");
             return Page();
         }
         public async Task<IActionResult> OnPostAsync()

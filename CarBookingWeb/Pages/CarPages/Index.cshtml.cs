@@ -19,7 +19,8 @@ namespace CarBookingWeb.Pages.CarPages
 
         public async Task OnGetAsync()
         {
-            Cars = await _context.Cars.ToListAsync();
+            Cars = await _context.Cars.Include(x=>x.CarMaker).ToListAsync();
+            //Cars = await _context.Cars.ToListAsync();
         }
 
         [HttpPost]

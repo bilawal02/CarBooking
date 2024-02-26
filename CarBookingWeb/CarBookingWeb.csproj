@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\CheckCar\" />
+    <Folder Include="Pages\CarMakerPages\" />
   </ItemGroup>
 
 </Project>

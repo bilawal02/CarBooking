@@ -1,4 +1,5 @@
-﻿using CarBookingWeb.Models;
+﻿using CarBookingModels.Models;
+using CarBookingWeb.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarBookingWeb.DataContext
@@ -9,5 +10,6 @@ namespace CarBookingWeb.DataContext
         {
         }
         public DbSet<Car> Cars { get; set; }
+        public DbSet<CarMaker> CarMakers { get; set; }
     }
 }

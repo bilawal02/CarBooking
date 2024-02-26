@@ -12,18 +12,25 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="Cars.CarMakerId" class="control-label"></label>
+                <select asp-for="Cars.CarMakerId" asp-items="Model.Makes" class="form-control">
+                    <option>---Select Maker---</option>
+                </select>
+                <span asp-validation-for="Cars.CarMakerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cars.Model" class="control-label"></label>
+                <input asp-for="Cars.Model" class="form-control" />
+                <span asp-validation-for="Cars.Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Cars.Year" class="control-label"></label>
                 <input asp-for="Cars.Year" class="form-control" />
                 <span asp-validation-for="Cars.Year" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Cars.Name" class="control-label"></label>
-                <input asp-for="Cars.Name" class="form-control" />
-                <span asp-validation-for="Cars.Name" class="text-danger"></span>
-            </div>
             <br />
             <div class="form-group d-grid">
-                <input type="submit" value="Create" class="btn btn-primary btn-block" />
+                <input type="submit" value="Create" class="btn btn-success btn-block" />
             </div>
         </form>
     </div>
@@ -32,7 +39,7 @@
 <br />
 
 <div>
-  <a asp-page="/CarPages/Index" class="btn btn-dark">Back</a>
+    <a asp-page="/CarPages/Index" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-left"></i> Back</a>
 </div>
 
 @section Scripts{
