@@ -19,7 +19,7 @@ namespace CarBookingWeb.Pages.CarPages
 
         public async Task OnGetAsync()
         {
-            Cars = await _context.Cars.Include(x=>x.CarMaker).ToListAsync();
+            Cars = await _context.Cars.Include(x=>x.CarMaker).Include(x => x.CarColor).Include(x => x.CarModel).ToListAsync();
             //Cars = await _context.Cars.ToListAsync();
         }
 

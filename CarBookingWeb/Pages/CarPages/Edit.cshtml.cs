@@ -18,6 +18,8 @@ namespace CarBookingWeb.Pages.CarPages
         [BindProperty]
         public Car Car { get; set; }
         public SelectList Makes { get; set; }
+        public SelectList Models { get; set; }
+        public SelectList Colors { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? carId)
         {
@@ -25,18 +27,19 @@ namespace CarBookingWeb.Pages.CarPages
             {
                 return NotFound();
             }
-            Car = await _context.Cars.FirstOrDefaultAsync(x=>x.CarId == carId);
+            Car = await _context.Cars.FirstOrDefaultAsync(x=>x.Id == carId);
             if (Car==null)
             {
                 return NotFound();
             }
-            Makes = new SelectList(await _context.CarMakers.ToListAsync(), "Id", "Name");
+            await LoadInitialDataDropDown();
             return Page();
         }
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
+                await LoadInitialDataDropDown();
                 return Page();
             }
             _context.Attach(Car).State = EntityState.Modified;
@@ -45,7 +48,13 @@ namespace CarBookingWeb.Pages.CarPages
         }
         private bool carExists(int? id)
         {
-            return _context.Cars.Any(x => x.CarId == id);
+            return _context.Cars.Any(x => x.Id == id);
+        }
+        private async Task LoadInitialDataDropDown()
+        {
+            Makes = new SelectList(await _context.CarMakers.ToListAsync(), "Id", "Name");
+            Models = new SelectList(await _context.CarModels.ToListAsync(), "Id", "Name");
+            Colors = new SelectList(await _context.CarColors.ToListAsync(), "Id", "Name");
         }
     }
 }

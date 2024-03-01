@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CarBookingModels.Models;
+using CarBookingWeb.DataContext;
+using CarBookingWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using CarBookingModels.Models;
-using CarBookingWeb.DataContext;
 
-namespace CarBookingWeb.Pages.CarMakerPages
+namespace CarBookingWeb.Pages.CarModelPages
 {
     public class EditModel : PageModel
     {
@@ -21,7 +18,8 @@ namespace CarBookingWeb.Pages.CarMakerPages
         }
 
         [BindProperty]
-        public CarMaker CarMaker { get; set; } = default!;
+        public CarModel CarModel { get; set; } = default!;
+        public SelectList Makes { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,12 +28,13 @@ namespace CarBookingWeb.Pages.CarMakerPages
                 return NotFound();
             }
 
-            var carmaker =  await _context.CarMakers.FirstOrDefaultAsync(m => m.Id == id);
-            if (carmaker == null)
+            var carmodel = await _context.CarModels.FirstOrDefaultAsync(m => m.Id == id);
+            if (carmodel == null)
             {
                 return NotFound();
             }
-            CarMaker = carmaker;
+            CarModel = carmodel;
+            await LoadInitialDataDropDown();
             return Page();
         }
 
@@ -45,10 +44,11 @@ namespace CarBookingWeb.Pages.CarMakerPages
         {
             if (!ModelState.IsValid)
             {
+                await LoadInitialDataDropDown();
                 return Page();
             }
 
-            _context.Attach(CarMaker).State = EntityState.Modified;
+            _context.Attach(CarModel).State = EntityState.Modified;
 
             try
             {
@@ -56,7 +56,7 @@ namespace CarBookingWeb.Pages.CarMakerPages
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CarMakerExists(CarMaker.Id))
+                if (!CarMakerExists(CarModel.Id))
                 {
                     return NotFound();
                 }
@@ -65,13 +65,17 @@ namespace CarBookingWeb.Pages.CarMakerPages
                     throw;
                 }
             }
-
             return RedirectToPage("./Index");
         }
 
         private bool CarMakerExists(int id)
         {
-            return _context.CarMakers.Any(e => e.Id == id);
+            return _context.CarModels.Any(e => e.Id == id);
+        }
+
+        private async Task LoadInitialDataDropDown()
+        {
+            Makes = new SelectList(await _context.CarMakers.ToListAsync(), "Id", "Name");
         }
     }
 }

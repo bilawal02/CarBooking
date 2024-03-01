@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CarBookingModels.Models;
-using CarBookingWeb.Data;
 using CarBookingWeb.DataContext;
 
 namespace CarBookingWeb.Pages.CarMakerPages

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using CarBookingModels.Models;
 using CarBookingWeb.DataContext;
+using CarBookingWeb.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
-namespace CarBookingWeb.Pages.CarMakerPages
+namespace CarBookingWeb.Pages.CarColorPages
 {
     public class EditModel : PageModel
     {
@@ -21,7 +17,7 @@ namespace CarBookingWeb.Pages.CarMakerPages
         }
 
         [BindProperty]
-        public CarMaker CarMaker { get; set; } = default!;
+        public CarColor CarColor { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,12 +26,12 @@ namespace CarBookingWeb.Pages.CarMakerPages
                 return NotFound();
             }
 
-            var carmaker =  await _context.CarMakers.FirstOrDefaultAsync(m => m.Id == id);
-            if (carmaker == null)
+            var carcolor = await _context.CarColors.FirstOrDefaultAsync(m => m.Id == id);
+            if (carcolor == null)
             {
                 return NotFound();
             }
-            CarMaker = carmaker;
+            CarColor = carcolor;
             return Page();
         }
 
@@ -48,7 +44,7 @@ namespace CarBookingWeb.Pages.CarMakerPages
                 return Page();
             }
 
-            _context.Attach(CarMaker).State = EntityState.Modified;
+            _context.Attach(CarColor).State = EntityState.Modified;
 
             try
             {
@@ -56,7 +52,7 @@ namespace CarBookingWeb.Pages.CarMakerPages
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CarMakerExists(CarMaker.Id))
+                if (!CarColorExists(CarColor.Id))
                 {
                     return NotFound();
                 }
@@ -69,7 +65,7 @@ namespace CarBookingWeb.Pages.CarMakerPages
             return RedirectToPage("./Index");
         }
 
-        private bool CarMakerExists(int id)
+        private bool CarColorExists(int id)
         {
             return _context.CarMakers.Any(e => e.Id == id);
         }

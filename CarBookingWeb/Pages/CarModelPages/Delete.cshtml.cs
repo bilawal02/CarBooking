@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CarBookingModels.Models;
+using CarBookingWeb.DataContext;
+using CarBookingWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using CarBookingModels.Models;
-using CarBookingWeb.DataContext;
 
-namespace CarBookingWeb.Pages.CarMakerPages
+namespace CarBookingWeb.Pages.CarModelPages
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +17,7 @@ namespace CarBookingWeb.Pages.CarMakerPages
         }
 
         [BindProperty]
-        public CarMaker CarMaker { get; set; } = default!;
+        public CarModel CarModel { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,15 +26,15 @@ namespace CarBookingWeb.Pages.CarMakerPages
                 return NotFound();
             }
 
-            var carmaker = await _context.CarMakers.FirstOrDefaultAsync(m => m.Id == id);
+            var carmodel = await _context.CarModels.Include(x => x.CarMaker).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (carmaker == null)
+            if (carmodel == null)
             {
                 return NotFound();
             }
             else
             {
-                CarMaker = carmaker;
+                CarModel = carmodel;
             }
             return Page();
         }
@@ -49,11 +46,11 @@ namespace CarBookingWeb.Pages.CarMakerPages
                 return NotFound();
             }
 
-            var carmaker = await _context.CarMakers.FindAsync(id);
-            if (carmaker != null)
+            var carmodel = await _context.CarModels.FindAsync(id);
+            if (carmodel != null)
             {
-                CarMaker = carmaker;
-                _context.CarMakers.Remove(CarMaker);
+                CarModel = carmodel;
+                _context.CarModels.Remove(CarModel);
                 await _context.SaveChangesAsync();
             }
 

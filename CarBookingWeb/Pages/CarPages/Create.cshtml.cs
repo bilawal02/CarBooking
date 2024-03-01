@@ -18,11 +18,16 @@ namespace CarBookingWeb.Pages.CarPages
         [BindProperty]
         public Car Cars { get; set; }
         public SelectList Makes { get; set; }
+        public SelectList Models { get; set; }
+        public SelectList Colors { get; set; }
 
         [HttpGet]
         public async Task<IActionResult> OnGet()
         {
-            await LoadCarMakerDropDown();
+            //await LoadCarMakerDropDown();
+            //await LoadCarModelDropDown();
+            //await LoadCarColorDropDown();
+            await LoadInitialDataDropDown();
             return Page();
         }
 
@@ -31,16 +36,35 @@ namespace CarBookingWeb.Pages.CarPages
         {
             if (!ModelState.IsValid)
             {
-                await LoadCarMakerDropDown();
+                //await LoadCarMakerDropDown();
+                //await LoadCarModelDropDown();
+                //await LoadCarColorDropDown();
+                await LoadInitialDataDropDown();
                 return Page();
             }
             await _context.Cars.AddAsync(Cars);
             await _context.SaveChangesAsync();
             return RedirectToPage("/CarPages/Index");
         }
-        private async Task LoadCarMakerDropDown()
+
+        //private async Task LoadCarMakerDropDown()
+        //{
+        //    Makes = new SelectList(await _context.CarMakers.ToListAsync(), "Id", "Name");
+        //}
+        //private async Task LoadCarModelDropDown()
+        //{
+        //    Models = new SelectList(await _context.CarModels.ToListAsync(), "Id", "Name");
+        //}
+        //private async Task LoadCarColorDropDown()
+        //{
+        //    Colors = new SelectList(await _context.CarColors.ToListAsync(), "Id", "Name");
+        //}
+
+        private async Task LoadInitialDataDropDown()
         {
             Makes = new SelectList(await _context.CarMakers.ToListAsync(), "Id", "Name");
+            Models = new SelectList(await _context.CarModels.ToListAsync(), "Id", "Name");
+            Colors = new SelectList(await _context.CarColors.ToListAsync(), "Id", "Name");
         }
     }
 }

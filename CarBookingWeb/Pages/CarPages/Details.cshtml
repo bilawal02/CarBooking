@@ -9,12 +9,12 @@
 <div>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Car.CarId)
+        @* <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.Id)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Car.CarId)
-        </dd>
+            @Html.DisplayFor(model => model.Car.Id)
+        </dd> *@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model=>model.Car.CarMaker.Name)
         </dt>
@@ -22,10 +22,16 @@
             @Html.DisplayFor(model=>model.Car.CarMaker.Name)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Car.Model)
+            @Html.DisplayNameFor(model => model.Car.CarModel.Name)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Car.Model)
+            @Html.DisplayFor(model => model.Car.CarModel.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.CarColor.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.CarColor.Name)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Car.Year)
@@ -33,10 +39,16 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Car.Year)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.LicensePlateNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.LicensePlateNumber)
+        </dd>
     </dl>
 </div>
 
 <div>
-    <a asp-page="/CarPages/Edit" asp-route-carId="@Model.Car.CarId" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Edit</a> |
+    <a asp-page="/CarPages/Edit" asp-route-carId="@Model.Car.Id" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Edit</a> |
     <a asp-page="/CarPages/Index" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-left"></i> Back</a>
 </div>

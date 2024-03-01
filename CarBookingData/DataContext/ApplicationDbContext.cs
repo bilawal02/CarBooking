@@ -11,5 +11,7 @@ namespace CarBookingWeb.DataContext
         }
         public DbSet<Car> Cars { get; set; }
         public DbSet<CarMaker> CarMakers { get; set; }
+        public DbSet<CarModel> CarModels { get; set; }
+        public DbSet<CarColor> CarColors { get; set; }
     }
 }

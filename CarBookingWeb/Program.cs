@@ -1,14 +1,13 @@
 ﻿using CarBookingWeb.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using CarBookingWeb.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddDbContext<CarBookingWebContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("CarBookingWebContext") ?? throw new InvalidOperationException("Connection string 'CarBookingWebContext' not found.")));
+//builder.Services.AddDbContext<CarBookingWebContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("CarBookingWebContext") ?? throw new InvalidOperationException("Connection string 'CarBookingWebContext' not found.")));
 
 // Custom - Register ConnectionString and DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

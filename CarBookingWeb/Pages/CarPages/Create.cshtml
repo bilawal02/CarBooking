@@ -19,14 +19,28 @@
                 <span asp-validation-for="Cars.CarMakerId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cars.Model" class="control-label"></label>
-                <input asp-for="Cars.Model" class="form-control" />
-                <span asp-validation-for="Cars.Model" class="text-danger"></span>
+                <label asp-for="Cars.CarModelId" class="control-label"></label>
+                <select asp-for="Cars.CarModelId" asp-items="Model.Models" class="form-control">
+                    <option>---Select Maker---</option>
+                </select>
+                <span asp-validation-for="Cars.CarModelId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cars.CarColorId" class="control-label"></label>
+                <select asp-for="Cars.CarColorId" asp-items="Model.Colors" class="form-control">
+                    <option>---Select Maker---</option>
+                </select>
+                <span asp-validation-for="Cars.CarColorId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Cars.Year" class="control-label"></label>
                 <input asp-for="Cars.Year" class="form-control" />
                 <span asp-validation-for="Cars.Year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cars.LicensePlateNumber" class="control-label"></label>
+                <input asp-for="Cars.LicensePlateNumber" class="form-control" />
+                <span asp-validation-for="Cars.LicensePlateNumber" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group d-grid">

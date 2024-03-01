@@ -10,14 +10,15 @@ using System.Threading.Tasks;
 
 namespace CarBookingModels.Models
 {
-    public class CarMaker
+    public class CarMaker:BaseDomainEntity
     {
-        [Key]
-        public int Id { get; set; }
+        //[Key]
+        //public int Id { get; set; }
         [Required(ErrorMessage ="This field is required")]
         [Display(Name ="Car Maker")]
         public string Name { get; set; }
         [ValidateNever]
+        public virtual List<CarModel> CarModels { get; set; }
         public virtual List<Car> Cars { get; set; }
     }
 }

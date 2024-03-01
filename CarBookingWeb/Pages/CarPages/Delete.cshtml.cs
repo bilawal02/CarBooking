@@ -23,7 +23,7 @@ namespace CarBookingWeb.Pages.CarPages
             {
                 return NotFound();
             }
-            Car = await _context.Cars.Include(x=>x.CarMaker).FirstOrDefaultAsync(x=>x.CarId == carId);
+            Car = await _context.Cars.Include(x=>x.CarMaker).FirstOrDefaultAsync(x=>x.Id == carId);
             if (Car == null)
             {
                 return NotFound();

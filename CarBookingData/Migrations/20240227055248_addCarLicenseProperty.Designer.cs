@@ -4,6 +4,7 @@ using CarBookingWeb.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarBookingData.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240227055248_addCarLicenseProperty")]
+    partial class addCarLicenseProperty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,7 +101,7 @@ namespace CarBookingData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CarColors");
+                    b.ToTable("CarColor");
                 });
 
             modelBuilder.Entity("CarBookingWeb.Models.CarModel", b =>
@@ -109,9 +112,6 @@ namespace CarBookingData.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CarMakerId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -121,9 +121,7 @@ namespace CarBookingData.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarMakerId");
-
-                    b.ToTable("CarModels");
+                    b.ToTable("CarModel");
                 });
 
             modelBuilder.Entity("CarBookingWeb.Models.Car", b =>
@@ -147,19 +145,8 @@ namespace CarBookingData.Migrations
                     b.Navigation("CarModel");
                 });
 
-            modelBuilder.Entity("CarBookingWeb.Models.CarModel", b =>
-                {
-                    b.HasOne("CarBookingModels.Models.CarMaker", "CarMaker")
-                        .WithMany("CarModels")
-                        .HasForeignKey("CarMakerId");
-
-                    b.Navigation("CarMaker");
-                });
-
             modelBuilder.Entity("CarBookingModels.Models.CarMaker", b =>
                 {
-                    b.Navigation("CarModels");
-
                     b.Navigation("Cars");
                 });
 

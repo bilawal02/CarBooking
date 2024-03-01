@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using CarBookingModels.Models;
 using CarBookingWeb.DataContext;
+using CarBookingWeb.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace CarBookingWeb.Pages.CarMakerPages
+namespace CarBookingWeb.Pages.CarColorPages
 {
     public class CreateModel : PageModel
     {
@@ -25,7 +21,7 @@ namespace CarBookingWeb.Pages.CarMakerPages
         }
 
         [BindProperty]
-        public CarMaker CarMaker { get; set; } = default!;
+        public CarColor CarColor { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -35,7 +31,7 @@ namespace CarBookingWeb.Pages.CarMakerPages
                 return Page();
             }
 
-            _context.CarMakers.Add(CarMaker);
+            _context.CarColors.Add(CarColor);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

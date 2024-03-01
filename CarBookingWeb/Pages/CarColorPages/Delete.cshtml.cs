@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CarBookingModels.Models;
+using CarBookingWeb.DataContext;
+using CarBookingWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using CarBookingModels.Models;
-using CarBookingWeb.DataContext;
 
-namespace CarBookingWeb.Pages.CarMakerPages
+namespace CarBookingWeb.Pages.CarColorPages
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +17,7 @@ namespace CarBookingWeb.Pages.CarMakerPages
         }
 
         [BindProperty]
-        public CarMaker CarMaker { get; set; } = default!;
+        public CarColor CarColor { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,15 +26,15 @@ namespace CarBookingWeb.Pages.CarMakerPages
                 return NotFound();
             }
 
-            var carmaker = await _context.CarMakers.FirstOrDefaultAsync(m => m.Id == id);
+            var carcolor = await _context.CarColors.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (carmaker == null)
+            if (carcolor == null)
             {
                 return NotFound();
             }
             else
             {
-                CarMaker = carmaker;
+                CarColor = carcolor;
             }
             return Page();
         }
@@ -49,11 +46,11 @@ namespace CarBookingWeb.Pages.CarMakerPages
                 return NotFound();
             }
 
-            var carmaker = await _context.CarMakers.FindAsync(id);
-            if (carmaker != null)
+            var carcolor = await _context.CarColors.FindAsync(id);
+            if (carcolor != null)
             {
-                CarMaker = carmaker;
-                _context.CarMakers.Remove(CarMaker);
+                CarColor = carcolor;
+                _context.CarColors.Remove(CarColor);
                 await _context.SaveChangesAsync();
             }
 

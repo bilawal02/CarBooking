@@ -1,31 +1,38 @@
+using CarBookingModels.Models;
 using CarBookingWeb.DataContext;
 using CarBookingWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace CarBookingWeb.Pages.CarPages
+namespace CarBookingWeb.Pages.CarModelPages
 {
     public class DetailsModel : PageModel
     {
         private readonly ApplicationDbContext _context;
+
         public DetailsModel(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public Car Car { get; set; }
-        public async Task<IActionResult> OnGetAsync(int? carId)
+        public CarModel CarModel { get; set; } = default!;
+
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (carId == null)
+            if (id == null)
             {
                 return NotFound();
             }
-            //Car = await _context.Cars.FindAsync(carId);
-            Car = await _context.Cars.Include(x=>x.CarMaker).Include(x => x.CarModel).Include(x => x.CarColor).FirstOrDefaultAsync(x=>x.Id == carId);
-            if (Car == null)
+
+            var carmodel = await _context.CarModels.Include(x=>x.CarMaker).FirstOrDefaultAsync(m => m.Id == id);
+            if (carmodel == null)
             {
                 return NotFound();
+            }
+            else
+            {
+                CarModel = carmodel;
             }
             return Page();
         }

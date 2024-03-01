@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CarBookingModels.Models;
+using CarBookingWeb.DataContext;
+using CarBookingWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using CarBookingModels.Models;
-using CarBookingWeb.DataContext;
+using Microsoft.EntityFrameworkCore;
 
-namespace CarBookingWeb.Pages.CarMakerPages
+namespace CarBookingWeb.Pages.CarModelPages
 {
     public class CreateModel : PageModel
     {
@@ -19,26 +17,33 @@ namespace CarBookingWeb.Pages.CarMakerPages
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            await LoadInitialDataDropDown();
             return Page();
         }
 
         [BindProperty]
-        public CarMaker CarMaker { get; set; } = default!;
+        public CarModel CarModel { get; set; } = default!;
+        public SelectList Makes { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
+                await LoadInitialDataDropDown();
                 return Page();
             }
-
-            _context.CarMakers.Add(CarMaker);
+            CarModel.CreatedDate = DateTime.Now;
+            _context.CarModels.Add(CarModel);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
+        }
+        private async Task LoadInitialDataDropDown()
+        {
+            Makes = new SelectList(await _context.CarMakers.ToListAsync(), "Id", "Name");
         }
     }
 }

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CarBookingModels.Models;
+using CarBookingWeb.DataContext;
+using CarBookingWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using CarBookingModels.Models;
-using CarBookingWeb.DataContext;
 
-namespace CarBookingWeb.Pages.CarMakerPages
+namespace CarBookingWeb.Pages.CarColorPages
 {
     public class IndexModel : PageModel
     {
@@ -19,11 +16,11 @@ namespace CarBookingWeb.Pages.CarMakerPages
             _context = context;
         }
 
-        public IList<CarMaker> CarMaker { get;set; } = default!;
+        public IList<CarColor> CarColors { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            CarMaker = await _context.CarMakers.ToListAsync();
+            CarColors = await _context.CarColors.ToListAsync();
         }
     }
 }
