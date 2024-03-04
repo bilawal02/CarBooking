@@ -30,7 +30,7 @@ namespace CarBookingWeb.Pages.CarColorPages
             {
                 return Page();
             }
-
+            CarColor.CreatedDate = DateTime.Now;
             _context.CarColors.Add(CarColor);
             await _context.SaveChangesAsync();
 

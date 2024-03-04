@@ -18,7 +18,6 @@ namespace CarBookingWeb.Pages.CarPages
         [BindProperty]
         public Car Cars { get; set; }
         public SelectList Makes { get; set; }
-        public SelectList Models { get; set; }
         public SelectList Colors { get; set; }
 
         [HttpGet]
@@ -42,6 +41,7 @@ namespace CarBookingWeb.Pages.CarPages
                 await LoadInitialDataDropDown();
                 return Page();
             }
+            Cars.CreatedDate = DateTime.Now;
             await _context.Cars.AddAsync(Cars);
             await _context.SaveChangesAsync();
             return RedirectToPage("/CarPages/Index");
@@ -63,8 +63,13 @@ namespace CarBookingWeb.Pages.CarPages
         private async Task LoadInitialDataDropDown()
         {
             Makes = new SelectList(await _context.CarMakers.ToListAsync(), "Id", "Name");
-            Models = new SelectList(await _context.CarModels.ToListAsync(), "Id", "Name");
             Colors = new SelectList(await _context.CarColors.ToListAsync(), "Id", "Name");
+        }
+
+        public async Task<IActionResult> OnGetLoadingCarModels(int carMakerId)
+        {
+            var carModels=await _context.CarModels.Where(x=>x.CarMakerId == carMakerId).ToListAsync();
+            return new JsonResult(carModels);
         }
     }
 }

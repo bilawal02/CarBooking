@@ -47,7 +47,7 @@ namespace CarBookingWeb.Pages.CarMakerPages
             {
                 return Page();
             }
-
+            CarMaker.CreatedDate = DateTime.Now;
             _context.Attach(CarMaker).State = EntityState.Modified;
 
             try

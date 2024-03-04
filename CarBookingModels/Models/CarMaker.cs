@@ -19,6 +19,7 @@ namespace CarBookingModels.Models
         public string Name { get; set; }
         [ValidateNever]
         public virtual List<CarModel> CarModels { get; set; }
+        [ValidateNever]
         public virtual List<Car> Cars { get; set; }
     }
 }

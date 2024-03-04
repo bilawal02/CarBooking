@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CarBookingModels.Models;
 using CarBookingWeb.DataContext;
+using CarBookingWeb.Models;
 
 namespace CarBookingWeb.Pages.CarMakerPages
 {
@@ -34,7 +35,7 @@ namespace CarBookingWeb.Pages.CarMakerPages
             {
                 return Page();
             }
-
+            CarMaker.CreatedDate = DateTime.Now;
             _context.CarMakers.Add(CarMaker);
             await _context.SaveChangesAsync();
 

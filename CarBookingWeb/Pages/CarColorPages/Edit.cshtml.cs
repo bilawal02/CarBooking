@@ -43,7 +43,7 @@ namespace CarBookingWeb.Pages.CarColorPages
             {
                 return Page();
             }
-
+            CarColor.CreatedDate = DateTime.Now;
             _context.Attach(CarColor).State = EntityState.Modified;
 
             try

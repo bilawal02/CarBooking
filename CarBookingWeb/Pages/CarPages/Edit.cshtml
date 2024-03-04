@@ -4,7 +4,7 @@
     ViewData["Title"] = "Cars";
 }
 
-<h1>Create New Car</h1>
+<h1>Edit Car</h1>
 <hr />
 
 <div class="row">
@@ -14,14 +14,14 @@
             <input type="hidden" asp-for="Car.Id"/>
             <div class="form-group">
                 <label asp-for="Car.CarMakerId" class="control-label"></label>
-                <select asp-for="Car.CarMakerId" asp-items="Model.Makes" class="form-control">
+                <select id="carMakers" asp-for="Car.CarMakerId" asp-items="Model.Makes" class="form-control">
                     <option>---Select Maker---</option>
                 </select>
                 <span asp-validation-for="Car.CarMakerId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Car.CarModelId" class="control-label"></label>
-                <select asp-for="Car.CarModelId" asp-items="Model.Models" class="form-control">
+                <select id="carModels" asp-for="Car.CarModelId" class="form-control">
                     <option>---Select Maker---</option>
                 </select>
                 <span asp-validation-for="Car.CarModelId" class="text-danger"></span>
@@ -59,4 +59,8 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        var carModelId = @Model.Car.CarModelId;
+    </script>
+    <script src="~/js/cascadingdrodown.js"></script>
 }

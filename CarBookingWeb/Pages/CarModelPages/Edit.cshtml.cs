@@ -47,7 +47,7 @@ namespace CarBookingWeb.Pages.CarModelPages
                 await LoadInitialDataDropDown();
                 return Page();
             }
-
+            CarModel.CreatedDate = DateTime.Now;
             _context.Attach(CarModel).State = EntityState.Modified;
 
             try
