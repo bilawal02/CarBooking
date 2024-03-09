@@ -1,4 +1,6 @@
-﻿using CarBookingWeb.DataContext;
+﻿using CarBookingRepository.Contract;
+using CarBookingRepository.Implementation;
+using CarBookingWeb.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +16,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationConnectionString"));
 });
+
+// Custom - Register IGenericRepostiory and GenericRepository, Repository Pattern
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 var app = builder.Build();
 

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarBookingModels", "CarBook
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarBookingData", "CarBookingData\CarBookingData.csproj", "{48106BF1-7F30-4E08-92B1-42B9DD888EFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarBookingRepository", "CarBookingRepository\CarBookingRepository.csproj", "{6DF6287B-9606-4401-A4C5-0D6C6FCB2C56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{48106BF1-7F30-4E08-92B1-42B9DD888EFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48106BF1-7F30-4E08-92B1-42B9DD888EFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48106BF1-7F30-4E08-92B1-42B9DD888EFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DF6287B-9606-4401-A4C5-0D6C6FCB2C56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DF6287B-9606-4401-A4C5-0D6C6FCB2C56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DF6287B-9606-4401-A4C5-0D6C6FCB2C56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DF6287B-9606-4401-A4C5-0D6C6FCB2C56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CarBookingData\CarBookingData.csproj" />
     <ProjectReference Include="..\CarBookingModels\CarBookingModels.csproj" />
+    <ProjectReference Include="..\CarBookingRepository\CarBookingRepository.csproj" />
   </ItemGroup>
 
   <ItemGroup>
