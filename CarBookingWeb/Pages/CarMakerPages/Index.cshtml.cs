@@ -25,5 +25,21 @@ namespace CarBookingWeb.Pages.CarMakerPages
         {
             CarMaker = await _context.CarMakers.ToListAsync();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> OnPostDelete(int? recordId)
+        {
+            if (recordId <= 0 || recordId == null)
+            {
+                return NotFound();
+            }
+            var carMaker = await _context.CarMakers.FindAsync(recordId);
+            if (carMaker != null)
+            {
+                _context.CarMakers.Remove(carMaker);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToPage("./Index");
+        }
     }
 }

@@ -17,13 +17,26 @@ namespace CarBookingWeb.Pages.CarPages
         [BindProperty]
         public Car Car { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? carId)
+        //public async Task<IActionResult> OnGetAsync(int? carId)
+        //{
+        //    if (carId == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    Car = await _context.Cars.Include(x=>x.CarMaker).FirstOrDefaultAsync(x=>x.Id == carId);
+        //    if (Car == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Page();
+        //}
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (carId == null)
+            if (id <= 0 || id == null)
             {
                 return NotFound();
             }
-            Car = await _context.Cars.Include(x=>x.CarMaker).FirstOrDefaultAsync(x=>x.Id == carId);
+            Car = await _context.Cars.Include(x => x.CarMaker).FirstOrDefaultAsync(x => x.Id == id);
             if (Car == null)
             {
                 return NotFound();
@@ -31,19 +44,33 @@ namespace CarBookingWeb.Pages.CarPages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? carId)
+        //public async Task<IActionResult> OnPostAsync(int? carId)
+        //{
+        //    if (carId == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    Car = await _context.Cars.FindAsync(carId);
+        //    if (Car != null)
+        //    {
+        //        _context.Cars.Remove(Car);
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    return RedirectToPage("/CarPages/Index");
+        //}
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (carId == null)
+            if (id <= 0 || id == null)
             {
                 return NotFound();
             }
-            Car = await _context.Cars.FindAsync(carId);
+            Car = await _context.Cars.FindAsync(id);
             if (Car != null)
             {
                 _context.Cars.Remove(Car);
                 await _context.SaveChangesAsync();
             }
-            return RedirectToPage("/CarPages/Index");
+            return RedirectToPage("./Index");
         }
     }
 }

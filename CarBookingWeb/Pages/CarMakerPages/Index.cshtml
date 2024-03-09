@@ -26,11 +26,17 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                @* <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a> *@
+                    @await Html.PartialAsync("_Buttons", item.Id)
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<partial name="_DeleteForm" />
+@section Scripts {
+    <script src="~/js/DeleteButton.js"></script>
+}

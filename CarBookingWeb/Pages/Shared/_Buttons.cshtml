@@ -1,0 +1,12 @@
+﻿@model int
+
+@{
+}
+
+@* <a asp-page="/CarPages/Details" asp-route-carId="@item.Id" class="btn btn-info"><i class="fa-solid fa-book-open"></i> Details</a> |
+<a asp-page="/CarPages/Edit" asp-route-carId="@item.Id" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Edit</a> |
+<button class="btn btn-danger confirmDelete" data-id="@item.Id"><i class="fa-solid fa-trash"></i> Delete</button> *@
+
+<a asp-page="./Details" asp-route-id="@Model" class="btn btn-info"><i class="fa-solid fa-book-open"></i> Details</a> |
+<a asp-page="./Edit" asp-route-id="@Model" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Edit</a> |
+<button class="btn btn-danger confirmDelete" data-id="@Model"><i class="fa-solid fa-trash"></i> Delete</button>

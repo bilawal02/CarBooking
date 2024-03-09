@@ -23,20 +23,52 @@ namespace CarBookingWeb.Pages.CarPages
             //Cars = await _context.Cars.ToListAsync();
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> OnPostDelete(int? carId)
+        //{
+        //    if (carId == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    var car = await _context.Cars.FindAsync(carId);
+        //    if (car != null)
+        //    {
+        //        _context.Cars.Remove(car);
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    return RedirectToPage("/CarPages/Index");
+        //}
+
+        //[HttpPost]
+        //public async Task<IActionResult> OnPostDelete(int? carId)
+        //{
+        //    if (carId <= 0 || carId == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    var car = await _context.Cars.FindAsync(carId);
+        //    if (car != null)
+        //    {
+        //        _context.Cars.Remove(car);
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    return RedirectToPage("./Index");
+        //}
+
         [HttpPost]
-        public async Task<IActionResult> OnPostDelete(int? carId)
+        public async Task<IActionResult> OnPostDelete(int? recordId)
         {
-            if (carId == null)
+            if (recordId <= 0 || recordId == null)
             {
                 return NotFound();
             }
-            var car = await _context.Cars.FindAsync(carId);
+            var car = await _context.Cars.FindAsync(recordId);
             if (car != null)
             {
                 _context.Cars.Remove(car);
                 await _context.SaveChangesAsync();
             }
-            return RedirectToPage("/CarPages/Index");
+            return RedirectToPage("./Index");
         }
     }
 }

@@ -12,6 +12,7 @@ namespace CarBookingWeb.Models
         //public int CarId { get; set; }
 
         [Required(ErrorMessage ="Year is Required")]
+        [Display(Name = "Manufacture Year")]
         public int Year { get; set; }
 
         //[Required(ErrorMessage = "Name is Required")]
@@ -37,6 +38,7 @@ namespace CarBookingWeb.Models
 
         [Required(ErrorMessage = "License Plate Number is Required")]
         [StringLength(7)]
+        [Display(Name = "License Plate Number")]
         public string LicensePlateNumber { get; set; }
     }
 }

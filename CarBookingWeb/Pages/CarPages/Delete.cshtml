@@ -46,6 +46,7 @@
     <form method="post">
         <input type="hidden" asp-for="Car.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> | 
-        <a asp-page="/CarPages/Index" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-left"></i> Back</a>
+        @* <a asp-page="/CarPages/Index" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-left"></i> Back</a> *@
+        <a asp-page="./Index" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-left"></i> Back</a>
     </form>
 </div>

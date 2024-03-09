@@ -29,40 +29,42 @@
                     <td>@item.Year</td>
                     <td>@item.LicensePlateNumber</td>
                     <td>
-                        <a asp-page="/CarPages/Details" asp-route-carId="@item.Id" class="btn btn-info"><i class="fa-solid fa-book-open"></i> Details</a> |
+                        @*<a asp-page="/CarPages/Details" asp-route-carId="@item.Id" class="btn btn-info"><i class="fa-solid fa-book-open"></i> Details</a> |
                         <a asp-page="/CarPages/Edit" asp-route-carId="@item.Id" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Edit</a> |
-                        <button class="btn btn-danger confirmDelete" data-id="@item.Id"><i class="fa-solid fa-trash"></i> Delete</button>
-
+                        <button class="btn btn-danger confirmDelete" data-id="@item.Id"><i class="fa-solid fa-trash"></i> Delete</button>*@
+                        @await Html.PartialAsync("_Buttons",item.Id)
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    <form method="post" asp-page-handler="Delete" id="myCarDeleteForm">
-        <input type="hidden" name="carId" id="carId" />
-    </form>
+    // <form method="post" asp-page-handler="Delete" id="myCarDeleteForm">
+    //     <input type="hidden" name="carId" id="carId" />
+    // </form>
+    <partial name="_DeleteForm" />
 
     @section Scripts {
-        <script>
-            $(function () {
-                $(".confirmDelete").click(function (e) {
-                    swal({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this!",
-                        icon: 'warning',
-                        buttons:true,
-                        dangerMode:true
-                    }).then((result) => {
-                        if (result) {
-                            var btn = $(this);
-                            var id = btn.data("id");
-                            $("#carId").val(id);
-                            $('#myCarDeleteForm').submit();
-                        }
-                    });
-                });
-            });
-        </script>
+        <script src="~/js/DeleteButton.js"></script>
+        //<script>
+        //     $(function () {
+        //         $(".confirmDelete").click(function (e) {
+        //             swal({
+        //                 title: 'Are you sure?',
+        //                 text: "You won't be able to revert this!",
+        //                 icon: 'warning',
+        //                 buttons: true,
+        //                 dangerMode: true
+        //             }).then((result) => {
+        //                 if (result) {
+        //                     var btn = $(this);
+        //                     var id = btn.data("id");
+        //                     $("#carId").val(id);
+        //                     $('#myCarDeleteForm').submit();
+        //                 }
+        //             });
+        //         });
+        //     });
+        // </script>
     }
 }
 

@@ -22,5 +22,21 @@ namespace CarBookingWeb.Pages.CarColorPages
         {
             CarColors = await _context.CarColors.ToListAsync();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> OnPostDelete(int? recordId)
+        {
+            if (recordId <= 0 || recordId == null)
+            {
+                return NotFound();
+            }
+            var carColor = await _context.CarColors.FindAsync(recordId);
+            if (carColor != null)
+            {
+                _context.CarColors.Remove(carColor);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToPage("./Index");
+        }
     }
 }
