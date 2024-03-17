@@ -1,5 +1,6 @@
 using CarBookingModels.Models;
 using CarBookingRepository.Contract;
+using CarBookingRepository.Implementation;
 using CarBookingWeb.DataContext;
 using CarBookingWeb.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -17,10 +18,11 @@ namespace CarBookingWeb.Pages.CarPages
         //    _context = context;
         //}
 
-        private readonly IGenericRepository<Car> _repository;
+        //private readonly IGenericRepository<Car> _repository;
+        private readonly ICarRepository _repository;
         private readonly IGenericRepository<CarMaker> _carMakerRepository;
         private readonly IGenericRepository<CarColor> _carColorRepository;
-        public EditModel(IGenericRepository<Car> repository, IGenericRepository<CarMaker> carMakerRepository, IGenericRepository<CarColor> carColorRepository)
+        public EditModel(ICarRepository repository, IGenericRepository<CarMaker> carMakerRepository, IGenericRepository<CarColor> carColorRepository)
         {
             _repository = repository;
             _carMakerRepository = carMakerRepository;
@@ -63,6 +65,10 @@ namespace CarBookingWeb.Pages.CarPages
         }
         public async Task<IActionResult> OnPostAsync()
         {
+            if (await _repository.IsLicensePlateExists(Car.LicensePlateNumber))
+            {
+                ModelState.AddModelError(nameof(Car.LicensePlateNumber), "License Plate Number Already Exists");
+            }
             if (!ModelState.IsValid)
             {
                 await LoadInitialDataDropDown();

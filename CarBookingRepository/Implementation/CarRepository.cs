@@ -30,5 +30,10 @@ namespace CarBookingRepository.Implementation
             var car = await _context.Cars.Include(x => x.CarMaker).Include(x => x.CarModel).Include(x => x.CarColor).FirstOrDefaultAsync(x => x.Id == id);
             return car;
         }
+
+        public async Task<bool> IsLicensePlateExists(string plateNo)
+        {
+            return await _context.Cars.AnyAsync(x=>x.LicensePlateNumber.ToLower().Trim() ==  plateNo.ToLower().Trim());
+        }
     }
 }

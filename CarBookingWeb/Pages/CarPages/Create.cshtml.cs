@@ -16,12 +16,13 @@ namespace CarBookingWeb.Pages.CarPages
         //{
         //    _context = context;
         //}
-        private readonly IGenericRepository<Car> _carRepository;
+        //private readonly IGenericRepository<Car> _carRepository;
+        private readonly ICarRepository _carRepository;
         private readonly IGenericRepository<CarMaker> _carMakerRepository;
         private readonly IGenericRepository<CarColor> _carColorRepository;
         //private readonly IGenericRepository<CarModel> _carModelRepository;
         private readonly ICarModelRepository _carModelRepository;
-        public CreateModel(IGenericRepository<Car> carRepository, IGenericRepository<CarMaker> carMakerRepository, IGenericRepository<CarColor> carColorRepository, ICarModelRepository carModelRepository)
+        public CreateModel(ICarRepository carRepository, IGenericRepository<CarMaker> carMakerRepository, IGenericRepository<CarColor> carColorRepository, ICarModelRepository carModelRepository)
         {
             _carRepository = carRepository;
             _carMakerRepository = carMakerRepository;
@@ -47,6 +48,10 @@ namespace CarBookingWeb.Pages.CarPages
         [HttpPost]
         public async Task<IActionResult> OnPostAsync()
         {
+            if (await _carRepository.IsLicensePlateExists(Cars.LicensePlateNumber))
+            {
+                ModelState.AddModelError(nameof(Cars.LicensePlateNumber), "License Plate Number Already Exists");
+            }
             if (!ModelState.IsValid)
             {
                 //await LoadCarMakerDropDown();
