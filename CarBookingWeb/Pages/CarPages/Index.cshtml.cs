@@ -1,3 +1,4 @@
+using CarBookingRepository.Contract;
 using CarBookingWeb.DataContext;
 using CarBookingWeb.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +9,22 @@ namespace CarBookingWeb.Pages.CarPages
 {
     public class IndexModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
-        public IndexModel(ApplicationDbContext context)
+        //private readonly ApplicationDbContext _context;
+        //public IndexModel(ApplicationDbContext context)
+        //{
+        //    _context = context;
+        //}
+
+        //private readonly IGenericRepository<Car> _repository;
+        //public IndexModel(IGenericRepository<Car> repository)
+        //{
+        //    _repository = repository;
+        //}
+
+        private readonly ICarRepository _repository;
+        public IndexModel(ICarRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public IList<Car> Cars { get; set; }
@@ -19,8 +32,9 @@ namespace CarBookingWeb.Pages.CarPages
 
         public async Task OnGetAsync()
         {
-            Cars = await _context.Cars.Include(x=>x.CarMaker).Include(x => x.CarColor).Include(x => x.CarModel).ToListAsync();
+            //Cars = await _context.Cars.Include(x=>x.CarMaker).Include(x => x.CarColor).Include(x => x.CarModel).ToListAsync();
             //Cars = await _context.Cars.ToListAsync();
+            Cars = await _repository.GetCarsWithDetails();
         }
 
         //[HttpPost]
@@ -62,11 +76,14 @@ namespace CarBookingWeb.Pages.CarPages
             {
                 return NotFound();
             }
-            var car = await _context.Cars.FindAsync(recordId);
+            //var car = await _context.Cars.FindAsync(recordId);
+            var car = await _repository.GetSingleAsync(recordId.Value);
             if (car != null)
             {
-                _context.Cars.Remove(car);
-                await _context.SaveChangesAsync();
+                //_context.Cars.Remove(car);
+                //await _context.SaveChangesAsync();
+
+                await _repository.DeleteAsync(recordId.Value);
             }
             return RedirectToPage("./Index");
         }

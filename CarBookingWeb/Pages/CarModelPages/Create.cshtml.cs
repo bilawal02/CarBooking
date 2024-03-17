@@ -1,4 +1,5 @@
 using CarBookingModels.Models;
+using CarBookingRepository.Contract;
 using CarBookingWeb.DataContext;
 using CarBookingWeb.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,11 +11,18 @@ namespace CarBookingWeb.Pages.CarModelPages
 {
     public class CreateModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        //private readonly ApplicationDbContext _context;
+        //public CreateModel(ApplicationDbContext context)
+        //{
+        //    _context = context;
+        //}
+        private readonly IGenericRepository<CarModel> _carModelRepository;
+        private readonly IGenericRepository<CarMaker> _carMakerRepository;
 
-        public CreateModel(ApplicationDbContext context)
+        public CreateModel(IGenericRepository<CarModel> carModelRepository, IGenericRepository<CarMaker> carMakerRepository)
         {
-            _context = context;
+            _carModelRepository = carModelRepository;
+            _carMakerRepository = carMakerRepository;
         }
 
         public async Task<IActionResult> OnGet()
@@ -36,14 +44,17 @@ namespace CarBookingWeb.Pages.CarModelPages
                 return Page();
             }
             CarModel.CreatedDate = DateTime.Now;
-            _context.CarModels.Add(CarModel);
-            await _context.SaveChangesAsync();
+            //_context.CarModels.Add(CarModel);
+            //await _context.SaveChangesAsync();
+
+            await _carModelRepository.AddAsync(CarModel);
 
             return RedirectToPage("./Index");
         }
         private async Task LoadInitialDataDropDown()
         {
-            Makes = new SelectList(await _context.CarMakers.ToListAsync(), "Id", "Name");
+            //Makes = new SelectList(await _context.CarMakers.ToListAsync(), "Id", "Name");
+            Makes = new SelectList(await _carMakerRepository.GetAllAsync(), "Id", "Name");
         }
     }
 }

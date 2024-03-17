@@ -1,4 +1,5 @@
 using CarBookingModels.Models;
+using CarBookingRepository.Contract;
 using CarBookingWeb.DataContext;
 using CarBookingWeb.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -9,18 +10,24 @@ namespace CarBookingWeb.Pages.CarColorPages
 {
     public class IndexModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        //private readonly ApplicationDbContext _context;
+        //public IndexModel(ApplicationDbContext context)
+        //{
+        //    _context = context;
+        //}
 
-        public IndexModel(ApplicationDbContext context)
+        private readonly IGenericRepository<CarColor> _repository;
+        public IndexModel(IGenericRepository<CarColor> repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public IList<CarColor> CarColors { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            CarColors = await _context.CarColors.ToListAsync();
+            //CarColors = await _context.CarColors.ToListAsync();
+            CarColors = await _repository.GetAllAsync();
         }
 
         [HttpPost]
@@ -30,11 +37,14 @@ namespace CarBookingWeb.Pages.CarColorPages
             {
                 return NotFound();
             }
-            var carColor = await _context.CarColors.FindAsync(recordId);
+            //var carColor = await _context.CarColors.FindAsync(recordId);
+            var carColor = await _repository.GetSingleAsync(recordId.Value);
             if (carColor != null)
             {
-                _context.CarColors.Remove(carColor);
-                await _context.SaveChangesAsync();
+                //_context.CarColors.Remove(carColor);
+                //await _context.SaveChangesAsync();
+
+                await _repository.DeleteAsync(recordId.Value);
             }
             return RedirectToPage("./Index");
         }

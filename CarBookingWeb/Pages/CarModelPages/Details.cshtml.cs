@@ -1,4 +1,5 @@
 using CarBookingModels.Models;
+using CarBookingRepository.Contract;
 using CarBookingWeb.DataContext;
 using CarBookingWeb.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -9,11 +10,22 @@ namespace CarBookingWeb.Pages.CarModelPages
 {
     public class DetailsModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        //private readonly ApplicationDbContext _context;
+        //public DetailsModel(ApplicationDbContext context)
+        //{
+        //    _context = context;
+        //}
 
-        public DetailsModel(ApplicationDbContext context)
+        //private readonly IGenericRepository<CarModel> _repository;
+        //public DetailsModel(IGenericRepository<CarModel> repository)
+        //{
+        //    _repository = repository;
+        //}
+
+        private readonly ICarModelRepository _repository;
+        public DetailsModel(ICarModelRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public CarModel CarModel { get; set; } = default!;
@@ -25,7 +37,8 @@ namespace CarBookingWeb.Pages.CarModelPages
                 return NotFound();
             }
 
-            var carmodel = await _context.CarModels.Include(x=>x.CarMaker).FirstOrDefaultAsync(m => m.Id == id);
+            //var carmodel = await _context.CarModels.Include(x=>x.CarMaker).FirstOrDefaultAsync(m => m.Id == id);
+            var carmodel = await _repository.GetCarModelWithDetails(id.Value);
             if (carmodel == null)
             {
                 return NotFound();

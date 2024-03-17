@@ -19,6 +19,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Custom - Register IGenericRepostiory and GenericRepository, Repository Pattern
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<ICarModelRepository, CarModelRepository>();
+builder.Services.AddScoped<ICarRepository, CarRepository>();
 
 var app = builder.Build();
 

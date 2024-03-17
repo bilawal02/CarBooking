@@ -7,16 +7,21 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CarBookingModels.Models;
 using CarBookingWeb.DataContext;
+using CarBookingRepository.Contract;
 
 namespace CarBookingWeb.Pages.CarMakerPages
 {
     public class DeleteModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
-
-        public DeleteModel(ApplicationDbContext context)
+        //private readonly ApplicationDbContext _context;
+        //public DeleteModel(ApplicationDbContext context)
+        //{
+        //    _context = context;
+        //}
+        private readonly IGenericRepository<CarMaker> _repository;
+        public DeleteModel(IGenericRepository<CarMaker> repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         [BindProperty]
@@ -29,7 +34,8 @@ namespace CarBookingWeb.Pages.CarMakerPages
                 return NotFound();
             }
 
-            var carmaker = await _context.CarMakers.FirstOrDefaultAsync(m => m.Id == id);
+            //var carmaker = await _context.CarMakers.FirstOrDefaultAsync(m => m.Id == id);
+            var carmaker = await _repository.GetSingleAsync(id.Value);
 
             if (carmaker == null)
             {
@@ -49,12 +55,15 @@ namespace CarBookingWeb.Pages.CarMakerPages
                 return NotFound();
             }
 
-            var carmaker = await _context.CarMakers.FindAsync(id);
+            //var carmaker = await _context.CarMakers.FindAsync(id);
+            var carmaker = await _repository.GetSingleAsync(id.Value);
             if (carmaker != null)
             {
                 CarMaker = carmaker;
-                _context.CarMakers.Remove(CarMaker);
-                await _context.SaveChangesAsync();
+                //_context.CarMakers.Remove(CarMaker);
+                //await _context.SaveChangesAsync();
+
+                await _repository.DeleteAsync(id.Value);
             }
 
             return RedirectToPage("./Index");

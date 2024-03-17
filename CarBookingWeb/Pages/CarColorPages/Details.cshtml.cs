@@ -1,4 +1,5 @@
 using CarBookingModels.Models;
+using CarBookingRepository.Contract;
 using CarBookingWeb.DataContext;
 using CarBookingWeb.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -9,11 +10,15 @@ namespace CarBookingWeb.Pages.CarColorPages
 {
     public class DetailsModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
-
-        public DetailsModel(ApplicationDbContext context)
+        //private readonly ApplicationDbContext _context;
+        //public DetailsModel(ApplicationDbContext context)
+        //{
+        //    _context = context;
+        //}
+        private readonly IGenericRepository<CarColor> _repository;
+        public DetailsModel(IGenericRepository<CarColor> repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public CarColor CarColor { get; set; } = default!;
@@ -25,7 +30,8 @@ namespace CarBookingWeb.Pages.CarColorPages
                 return NotFound();
             }
 
-            var carcolor = await _context.CarColors.FirstOrDefaultAsync(m => m.Id == id);
+            //var carcolor = await _context.CarColors.FirstOrDefaultAsync(m => m.Id == id);
+            var carcolor = await _repository.GetSingleAsync(id.Value);
             if (carcolor == null)
             {
                 return NotFound();

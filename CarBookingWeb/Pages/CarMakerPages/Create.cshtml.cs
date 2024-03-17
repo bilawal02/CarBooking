@@ -8,16 +8,22 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using CarBookingModels.Models;
 using CarBookingWeb.DataContext;
 using CarBookingWeb.Models;
+using CarBookingRepository.Contract;
 
 namespace CarBookingWeb.Pages.CarMakerPages
 {
     public class CreateModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        //private readonly ApplicationDbContext _context;
+        //public CreateModel(ApplicationDbContext context)
+        //{
+        //    _context = context;
+        //}
 
-        public CreateModel(ApplicationDbContext context)
+        private readonly IGenericRepository<CarMaker> _repository;
+        public CreateModel(IGenericRepository<CarMaker> repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public IActionResult OnGet()
@@ -36,8 +42,10 @@ namespace CarBookingWeb.Pages.CarMakerPages
                 return Page();
             }
             CarMaker.CreatedDate = DateTime.Now;
-            _context.CarMakers.Add(CarMaker);
-            await _context.SaveChangesAsync();
+
+            //_context.CarMakers.Add(CarMaker);
+            //await _context.SaveChangesAsync();
+            await _repository.AddAsync(CarMaker);
 
             return RedirectToPage("./Index");
         }

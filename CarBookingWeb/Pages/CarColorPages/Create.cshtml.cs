@@ -1,4 +1,5 @@
 using CarBookingModels.Models;
+using CarBookingRepository.Contract;
 using CarBookingWeb.DataContext;
 using CarBookingWeb.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,11 +9,15 @@ namespace CarBookingWeb.Pages.CarColorPages
 {
     public class CreateModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
-
-        public CreateModel(ApplicationDbContext context)
+        //private readonly ApplicationDbContext _context;
+        //public CreateModel(ApplicationDbContext context)
+        //{
+        //    _context = context;
+        //}
+        private readonly IGenericRepository<CarColor> _repository;
+        public CreateModel(IGenericRepository<CarColor> repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public IActionResult OnGet()
@@ -31,8 +36,10 @@ namespace CarBookingWeb.Pages.CarColorPages
                 return Page();
             }
             CarColor.CreatedDate = DateTime.Now;
-            _context.CarColors.Add(CarColor);
-            await _context.SaveChangesAsync();
+            //_context.CarColors.Add(CarColor);
+            //await _context.SaveChangesAsync();
+
+            await _repository.AddAsync(CarColor);
 
             return RedirectToPage("./Index");
         }

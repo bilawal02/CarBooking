@@ -13,7 +13,8 @@ namespace CarBookingRepository.Contract
         Task<TEntity> GetSingleAsync(int id);
         Task AddAsync(TEntity entity);
         Task DeleteAsync(int id);
-        void EditAsync(TEntity entity);
+        Task EditAsync(TEntity entity);
         Task<bool> ExistsAsync(int id);
+        Task<int> SaveAsync();
     }
 }

@@ -23,17 +23,21 @@ namespace CarBookingRepository.Implementation
         public async Task AddAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
+            await SaveAsync();
         }
-        public void EditAsync(TEntity entity)
+        public async Task EditAsync(TEntity entity)
         {
-            _dbSet.Attach(entity);
-            _context.Entry(entity).State = EntityState.Modified;
+            //_dbSet.Attach(entity);
+            //_context.Entry(entity).State = EntityState.Modified;
+            _dbSet.Update(entity);
+            await SaveAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
             var record = await _dbSet.FindAsync(id);
             _dbSet.Remove(record);
+            await SaveAsync();
         }
 
         public async Task<bool> ExistsAsync(int id)
@@ -49,6 +53,11 @@ namespace CarBookingRepository.Implementation
         public async Task<TEntity> GetSingleAsync(int id)
         {
             return await _dbSet.FindAsync(id);
+        }
+
+        public async Task<int> SaveAsync()
+        {
+            return await _context.SaveChangesAsync();
         }
     }
 }

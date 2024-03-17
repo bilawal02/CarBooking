@@ -1,4 +1,5 @@
 using CarBookingModels.Models;
+using CarBookingRepository.Contract;
 using CarBookingWeb.DataContext;
 using CarBookingWeb.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -9,11 +10,15 @@ namespace CarBookingWeb.Pages.CarColorPages
 {
     public class EditModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
-
-        public EditModel(ApplicationDbContext context)
+        //private readonly ApplicationDbContext _context;
+        //public EditModel(ApplicationDbContext context)
+        //{
+        //    _context = context;
+        //}
+        private readonly IGenericRepository<CarColor> _repository;
+        public EditModel(IGenericRepository<CarColor> repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         [BindProperty]
@@ -26,7 +31,8 @@ namespace CarBookingWeb.Pages.CarColorPages
                 return NotFound();
             }
 
-            var carcolor = await _context.CarColors.FirstOrDefaultAsync(m => m.Id == id);
+            //var carcolor = await _context.CarColors.FirstOrDefaultAsync(m => m.Id == id);
+            var carcolor = await _repository.GetSingleAsync(id.Value);
             if (carcolor == null)
             {
                 return NotFound();
@@ -44,30 +50,37 @@ namespace CarBookingWeb.Pages.CarColorPages
                 return Page();
             }
             CarColor.CreatedDate = DateTime.Now;
-            _context.Attach(CarColor).State = EntityState.Modified;
+            //_context.Attach(CarColor).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CarColorExists(CarColor.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _repository.EditAsync(CarColor);
+
+            //try
+            //{
+            //    await _context.SaveChangesAsync();
+            //}
+            //catch (DbUpdateConcurrencyException)
+            //{
+            //    if (!CarColorExists(CarColor.Id))
+            //    {
+            //        return NotFound();
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
 
             return RedirectToPage("./Index");
         }
 
-        private bool CarColorExists(int id)
+        //private bool CarColorExists(int id)
+        //{
+        //    return _context.CarMakers.Any(e => e.Id == id);
+        //}
+
+        private async Task<bool> CarColorExists(int id)
         {
-            return _context.CarMakers.Any(e => e.Id == id);
+            return await _repository.ExistsAsync(id);
         }
     }
 }

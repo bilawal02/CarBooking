@@ -7,16 +7,21 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CarBookingModels.Models;
 using CarBookingWeb.DataContext;
+using CarBookingRepository.Contract;
 
 namespace CarBookingWeb.Pages.CarMakerPages
 {
     public class DetailsModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
-
-        public DetailsModel(ApplicationDbContext context)
+        //private readonly ApplicationDbContext _context;
+        //public DetailsModel(ApplicationDbContext context)
+        //{
+        //    _context = context;
+        //}
+        private readonly IGenericRepository<CarMaker> _repository;
+        public DetailsModel(IGenericRepository<CarMaker> repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public CarMaker CarMaker { get; set; } = default!;
@@ -28,7 +33,8 @@ namespace CarBookingWeb.Pages.CarMakerPages
                 return NotFound();
             }
 
-            var carmaker = await _context.CarMakers.FirstOrDefaultAsync(m => m.Id == id);
+            //var carmaker = await _context.CarMakers.FirstOrDefaultAsync(m => m.Id == id);
+            var carmaker = await _repository.GetSingleAsync(id.Value);
             if (carmaker == null)
             {
                 return NotFound();
