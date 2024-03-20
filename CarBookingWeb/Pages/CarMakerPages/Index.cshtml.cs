@@ -11,6 +11,7 @@ using CarBookingRepository.Contract;
 
 namespace CarBookingWeb.Pages.CarMakerPages
 {
+    //[Authorize]
     public class IndexModel : PageModel
     {
         //private readonly ApplicationDbContext _context;

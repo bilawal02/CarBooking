@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CarBookingWeb.Pages.CarColorPages
 {
+    //[Authorize]
     public class CreateModel : PageModel
     {
         //private readonly ApplicationDbContext _context;

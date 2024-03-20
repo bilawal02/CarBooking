@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarBookingWeb.Pages.CarColorPages
 {
+    //[Authorize]
     public class DetailsModel : PageModel
     {
         //private readonly ApplicationDbContext _context;

@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarBookingWeb.Pages.CarPages
 {
+    //[Authorize]
     public class EditModel : PageModel
     {
         //private readonly ApplicationDbContext _context;

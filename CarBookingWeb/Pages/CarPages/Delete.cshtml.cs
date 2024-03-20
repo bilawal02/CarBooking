@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarBookingWeb.Pages.CarPages
 {
+    //[Authorize]
     public class DeleteModel : PageModel
     {
         //private readonly ApplicationDbContext _context;

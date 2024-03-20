@@ -36,10 +36,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //{
 //    options.SignIn.RequireConfirmedAccount = false;
 //}).AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+//builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+//{
+//    options.SignIn.RequireConfirmedAccount = false;
+//}).AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
-}).AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
+}).AddDefaultTokenProviders().AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
 //Custom - Register fake implementation of IEmailSender
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
@@ -48,6 +52,12 @@ builder.Services.AddSingleton<IEmailSender, EmailSender>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ICarModelRepository, CarModelRepository>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
+
+//Custom - Add Authorization attribute globally (on each page)
+builder.Services.AddRazorPages(x =>
+{
+    x.Conventions.AuthorizeFolder("/");
+});
 
 var app = builder.Build();
 
@@ -63,6 +73,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+//Custom - For Login
+app.UseAuthentication();
 
 app.UseAuthorization();
 

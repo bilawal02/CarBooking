@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarBookingWeb.Pages.CarModelPages
 {
+    //[Authorize]
     public class CreateModel : PageModel
     {
         //private readonly ApplicationDbContext _context;

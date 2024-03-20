@@ -12,6 +12,7 @@ using CarBookingRepository.Contract;
 
 namespace CarBookingWeb.Pages.CarMakerPages
 {
+    //[Authorize]
     public class EditModel : PageModel
     {
         //private readonly ApplicationDbContext _context;
