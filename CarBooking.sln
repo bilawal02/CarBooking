@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarBookingWeb", "CarBooking
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarBookingModels", "CarBookingModels\CarBookingModels.csproj", "{22A39D79-8C41-4B71-9925-E8A8D7CB699B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarBookingData", "CarBookingData\CarBookingData.csproj", "{48106BF1-7F30-4E08-92B1-42B9DD888EFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarBookingRepository", "CarBookingRepository\CarBookingRepository.csproj", "{6DF6287B-9606-4401-A4C5-0D6C6FCB2C56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarBookingRepository", "CarBookingRepository\CarBookingRepository.csproj", "{6DF6287B-9606-4401-A4C5-0D6C6FCB2C56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarBookingDataModify", "CarBookingDataModify\CarBookingDataModify.csproj", "{5D07AFA8-F77D-4635-BBE2-DEA28721B2BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarBookingUtility", "CarBookingUtility\CarBookingUtility.csproj", "{7ACD9EE9-7B6C-4A5E-AAE1-400C0D4113A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +27,18 @@ Global
 		{22A39D79-8C41-4B71-9925-E8A8D7CB699B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22A39D79-8C41-4B71-9925-E8A8D7CB699B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22A39D79-8C41-4B71-9925-E8A8D7CB699B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{48106BF1-7F30-4E08-92B1-42B9DD888EFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{48106BF1-7F30-4E08-92B1-42B9DD888EFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{48106BF1-7F30-4E08-92B1-42B9DD888EFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{48106BF1-7F30-4E08-92B1-42B9DD888EFD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6DF6287B-9606-4401-A4C5-0D6C6FCB2C56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6DF6287B-9606-4401-A4C5-0D6C6FCB2C56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DF6287B-9606-4401-A4C5-0D6C6FCB2C56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DF6287B-9606-4401-A4C5-0D6C6FCB2C56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D07AFA8-F77D-4635-BBE2-DEA28721B2BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D07AFA8-F77D-4635-BBE2-DEA28721B2BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D07AFA8-F77D-4635-BBE2-DEA28721B2BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D07AFA8-F77D-4635-BBE2-DEA28721B2BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ACD9EE9-7B6C-4A5E-AAE1-400C0D4113A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ACD9EE9-7B6C-4A5E-AAE1-400C0D4113A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ACD9EE9-7B6C-4A5E-AAE1-400C0D4113A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ACD9EE9-7B6C-4A5E-AAE1-400C0D4113A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace CarBookingData.Migrations
+namespace CarBookingDataModify.Migrations
 {
     /// <inheritdoc />
-    public partial class addUserIdentity : Migration
+    public partial class addAllInOne : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,6 +30,9 @@ namespace CarBookingData.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -48,6 +51,34 @@ namespace CarBookingData.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CarColors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarColors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CarMakers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarMakers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -156,6 +187,59 @@ namespace CarBookingData.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CarModels",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CarMakerId = table.Column<int>(type: "int", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarModels", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CarModels_CarMakers_CarMakerId",
+                        column: x => x.CarMakerId,
+                        principalTable: "CarMakers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cars",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Year = table.Column<int>(type: "int", nullable: false),
+                    CarModelId = table.Column<int>(type: "int", nullable: true),
+                    CarMakerId = table.Column<int>(type: "int", nullable: true),
+                    CarColorId = table.Column<int>(type: "int", nullable: true),
+                    LicensePlateNumber = table.Column<string>(type: "nvarchar(7)", maxLength: 7, nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cars", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cars_CarColors_CarColorId",
+                        column: x => x.CarColorId,
+                        principalTable: "CarColors",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Cars_CarMakers_CarMakerId",
+                        column: x => x.CarMakerId,
+                        principalTable: "CarMakers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Cars_CarModels_CarModelId",
+                        column: x => x.CarModelId,
+                        principalTable: "CarModels",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -194,6 +278,26 @@ namespace CarBookingData.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CarModels_CarMakerId",
+                table: "CarModels",
+                column: "CarMakerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cars_CarColorId",
+                table: "Cars",
+                column: "CarColorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cars_CarMakerId",
+                table: "Cars",
+                column: "CarMakerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cars_CarModelId",
+                table: "Cars",
+                column: "CarModelId");
         }
 
         /// <inheritdoc />
@@ -215,10 +319,22 @@ namespace CarBookingData.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Cars");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "CarColors");
+
+            migrationBuilder.DropTable(
+                name: "CarModels");
+
+            migrationBuilder.DropTable(
+                name: "CarMakers");
         }
     }
 }
